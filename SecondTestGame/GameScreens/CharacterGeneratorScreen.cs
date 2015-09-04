@@ -41,6 +41,7 @@ namespace SecondTestGame.GameScreens {
             _backgroundImage = new PictureBox(
                 Game.Content.Load<Texture2D>(@"Backgrounds\startScreen"),
                 GameRef.ScreenRectangle);
+            ControlManager.Add(_backgroundImage);
 
             var label1 = new Label {
                 Text = "Who shall Thy be?"
@@ -60,7 +61,7 @@ namespace SecondTestGame.GameScreens {
             ControlManager.Add(_classSelector);
 
             var linklabel1 = new LinkLabel {Text = "Accept", Position = new Vector2(label1.Position.X, 300)};
-            linklabel1.Selected += new EventHandler(linklabel1_Selected);
+            linklabel1.Selected += linklabel1_Selected;
             ControlManager.Add(linklabel1);
 
             ControlManager.NextControl();
