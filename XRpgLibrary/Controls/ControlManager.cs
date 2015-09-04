@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace XRpgLibrary.Controls {
     public class ControlManager : List<Control> {
-        private int _selectedControl = 0;
+        private int _selectedControl;
 
         public static SpriteFont SpriteFont { get; private set; }
         public event EventHandler FocusChanged;
@@ -72,7 +71,7 @@ namespace XRpgLibrary.Controls {
                 }
 
                 if (this[_selectedControl].TabStop && this[_selectedControl].Enabled) {
-                    FocusChanged?.Invoke(this[_selectedControl], null);
+                    FocusChanged?.Invoke(this[_selectedControl], EventArgs.Empty);
                     break;
                 }
             } while (currentControl != _selectedControl);
@@ -96,7 +95,7 @@ namespace XRpgLibrary.Controls {
                 }
 
                 if (this[_selectedControl].TabStop && this[_selectedControl].Enabled) {
-                    FocusChanged?.Invoke(this[_selectedControl], null);
+                    FocusChanged?.Invoke(this[_selectedControl], EventArgs.Empty);
                     break;
                 }
             } while (currentControl != _selectedControl);

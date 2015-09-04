@@ -1,13 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace XRpgLibrary {
-    public class GameStateManager :GameComponent {
-        public event EventHandler OnStateChange; // TODO: FIND OUT WHAT IT IS AND REPAIR
+    public class GameStateManager : GameComponent {
+        public event EventHandler OnStateChange; 
         private readonly Stack<GameState> _gameStates = new Stack<GameState>();
-
         private const int StartDrawOrder = 5000;
         private const int DrawOrderInc = 100;
         private int _drawOrder;
@@ -32,11 +30,11 @@ namespace XRpgLibrary {
             }
             RemoveState();
             _drawOrder -= DrawOrderInc;
-            OnStateChange?.Invoke(this, null);
+            OnStateChange?.Invoke(this, EventArgs.Empty);
         }
 
         private void RemoveState() {
-            GameState state = _gameStates.Peek();
+            var state = _gameStates.Peek();
             OnStateChange -= state.StateChange;
             Game.Components.Remove(state);
             _gameStates.Pop();
@@ -46,7 +44,7 @@ namespace XRpgLibrary {
             _drawOrder += DrawOrderInc;
             newState.DrawOrder = _drawOrder;
             AddState(newState);
-            OnStateChange?.Invoke(this, null);
+            OnStateChange?.Invoke(this, EventArgs.Empty);
         }
 
         private void AddState(GameState newState) {
@@ -65,7 +63,7 @@ namespace XRpgLibrary {
 
             AddState(newState);
 
-            OnStateChange?.Invoke(this, null);
+            OnStateChange?.Invoke(this, EventArgs.Empty);
         }
     }
 }

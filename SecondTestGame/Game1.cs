@@ -16,10 +16,11 @@ namespace SecondTestGame {
         public readonly StartMenuScreen StartMenuScreen;
         public readonly GamePlayScreen GamePlayScreen;
         public readonly Rectangle ScreenRectangle;
+        public readonly CharacterGeneratorScreen CharacterGeneratorScreen;
 
         private const int ScreenWidth = 1024;
         private const int ScreenHeight = 766;
-        
+
         public Game1() {
             _graphics = new GraphicsDeviceManager(this) {
                 PreferredBackBufferWidth = ScreenWidth,
@@ -35,6 +36,7 @@ namespace SecondTestGame {
             TitleScreen = new TitleScreen(this, stateManager);
             StartMenuScreen = new StartMenuScreen(this, stateManager);
             GamePlayScreen = new GamePlayScreen(this, stateManager);
+            CharacterGeneratorScreen = new CharacterGeneratorScreen(this, stateManager);
             stateManager.ChangeState(TitleScreen);
         }
 
@@ -75,8 +77,10 @@ namespace SecondTestGame {
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime) {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+                Keyboard.GetState().IsKeyDown(Keys.Escape)) {
                 Exit();
+            }
 
             // TODO: Add your update logic here
 

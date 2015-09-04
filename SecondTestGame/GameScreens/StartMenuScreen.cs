@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using XRpgLibrary;
 using XRpgLibrary.Controls;
 
@@ -14,7 +12,7 @@ namespace SecondTestGame.GameScreens {
         private LinkLabel _startGame;
         private LinkLabel _loadGame;
         private LinkLabel _exitGame;
-        private float _maxItemWidth = 0f;
+        private float _maxItemWidth;
 
 
         public StartMenuScreen(Game game, GameStateManager manager) : base(game, manager) {}
@@ -25,7 +23,7 @@ namespace SecondTestGame.GameScreens {
             var content = Game.Content;
 
             _backgroundImage = new PictureBox(
-                content.Load<Texture2D>(@"Backgrounds\titlescreen"),
+                content.Load<Texture2D>(@"Backgrounds\startScreen"),
                 GameRef.ScreenRectangle);
             ControlManager.Add(_backgroundImage);
 
@@ -63,7 +61,7 @@ namespace SecondTestGame.GameScreens {
                 position.Y += c.Size.Y + 5f;
             }
 
-            ControlManager_FocusChanged(_startGame, null);
+            ControlManager_FocusChanged(_startGame, EventArgs.Empty);
         }
 
         private void ControlManager_FocusChanged(object sender, EventArgs e) {
@@ -75,7 +73,7 @@ namespace SecondTestGame.GameScreens {
 
         private void menuItem_Selected(object sender, EventArgs e) {
             if (sender == _startGame) {
-                StateManager.PushState(GameRef.GamePlayScreen);
+                StateManager.PushState(GameRef.CharacterGeneratorScreen);
             }
             if (sender == _loadGame) {
                 StateManager.PushState(GameRef.GamePlayScreen);
